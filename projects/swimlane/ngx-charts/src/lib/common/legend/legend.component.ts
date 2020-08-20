@@ -26,6 +26,7 @@ import { formatLabel } from '../label.helper';
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
               [isActive]="isActive(entry)"
+              [percentage]="entry.percentage"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)"
@@ -48,6 +49,7 @@ export class LegendComponent implements OnChanges {
   @Input() width;
   @Input() activeEntries;
   @Input() horizontal = false;
+  @Input() percentages: number[];
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();
@@ -80,7 +82,8 @@ export class LegendComponent implements OnChanges {
         items.push({
           label,
           formattedLabel,
-          color: this.colors.getColor(label)
+          color: this.colors.getColor(label),
+          percentage: this.percentages && this.percentages[this.data.indexOf(label)]
         });
       }
     }

@@ -6,7 +6,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventE
     <span [title]="formattedLabel" tabindex="-1" [class.active]="isActive" (click)="select.emit(formattedLabel)">
       <span class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </span>
       <span class="legend-label-text">
-        {{ trimmedLabel }}
+        {{ trimmedLabel }}<span *ngIf="percentage !== undefined"> ({{ percentage }} %)</span>
       </span>
     </span>
   `,
@@ -17,6 +17,7 @@ export class LegendEntryComponent {
   @Input() label: any;
   @Input() formattedLabel: string;
   @Input() isActive: boolean = false;
+  @Input() percentage: number;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();

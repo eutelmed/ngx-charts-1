@@ -38,6 +38,7 @@ import { TooltipService } from '../tooltip/tooltip.service';
         [height]="view[1]"
         [width]="legendWidth"
         [activeEntries]="activeEntries"
+        [percentages]="legendOptions.percentages"
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
         (labelDeactivate)="legendLabelDeactivate.emit($event)"
@@ -90,14 +91,18 @@ export class ChartComponent implements OnChanges {
         }
       }
     }
+    if (this.legendOptions && this.legendOptions.minWidth) {
+      this.legendWidth = this.legendOptions.minWidth;
+      this.chartWidth = this.view[0] - this.legendWidth;
+    } else {
+      const chartColumns = 12 - legendColumns;
 
-    const chartColumns = 12 - legendColumns;
-
-    this.chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
-    this.legendWidth =
-      !this.legendOptions || this.legendOptions.position === 'right'
-        ? Math.floor((this.view[0] * legendColumns) / 12.0)
-        : this.chartWidth;
+      this.chartWidth = Math.floor((this.view[0] * chartColumns) / 12.0);
+      this.legendWidth =
+        !this.legendOptions || this.legendOptions.position === 'right'
+          ? Math.floor((this.view[0] * legendColumns) / 12.0)
+          : this.chartWidth;
+    }
   }
 
   getLegendType(): string {

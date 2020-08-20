@@ -61,6 +61,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() legendMinWidth: number = 300;
   @Input() explodeSlices = false;
   @Input() doughnut = false;
   @Input() arcWidth = 0.25;
@@ -88,6 +89,7 @@ export class PieChartComponent extends BaseChartComponent {
   domain: any;
   dims: any;
   legendOptions: any;
+  percentages: number[];
 
   update(): void {
     super.update();
@@ -109,10 +111,10 @@ export class PieChartComponent extends BaseChartComponent {
 
     this.formatDates();
 
-    const xOffset = this.margins[3] + this.dims.width / 2;
+    const xOffset = this.margins[3] + (this.width - this.legendMinWidth) / 2;
     const yOffset = this.margins[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
-    this.outerRadius = Math.min(this.dims.width, this.dims.height);
+    this.outerRadius = Math.min(this.width - this.legendMinWidth, this.dims.height);
     if (this.labels) {
       // make room for labels
       this.outerRadius /= 3;
@@ -125,6 +127,7 @@ export class PieChartComponent extends BaseChartComponent {
     }
 
     this.domain = this.getDomain();
+    this.percentages = this.getPercentages();
 
     // sort data according to domain
     this.data = this.results.sort((a, b) => {
@@ -137,6 +140,10 @@ export class PieChartComponent extends BaseChartComponent {
 
   getDomain(): any[] {
     return this.results.map(d => d.label);
+  }
+
+  getPercentages(): number[] {
+    return this.results.map(d => d.value);
   }
 
   onClick(data: DataItem): void {
@@ -153,7 +160,9 @@ export class PieChartComponent extends BaseChartComponent {
       domain: this.domain,
       colors: this.colors,
       title: this.legendTitle,
-      position: this.legendPosition
+      position: this.legendPosition,
+      percentages: this.percentages,
+      minWidth: this.legendMinWidth
     };
   }
 
