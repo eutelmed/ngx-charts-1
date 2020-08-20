@@ -1,10 +1,13 @@
 {
-  "name": "@swimlane/ngx-charts",
+  "name": "@eutelmed/ngx-charts",
   "version": "14.0.0",
   "description": "Declarative Charting Framework for Angular",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swimlane/ngx-charts.git"
+    "url": "git+https://github.com/eutelmed/ngx-charts-1.git"
   },
   "keywords": [
     "angular",
