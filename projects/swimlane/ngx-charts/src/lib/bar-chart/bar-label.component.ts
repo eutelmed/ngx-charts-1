@@ -41,8 +41,8 @@ export class BarLabelComponent implements OnChanges {
   element: any;
   x: number;
   y: number;
-  horizontalPadding: number = 2;
-  verticalPadding: number = 5;
+  horizontalPadding: number = 10;
+  verticalPadding: number = 13;
   formatedValue: string;
   transform: string;
   textAnchor: string;
@@ -73,7 +73,7 @@ export class BarLabelComponent implements OnChanges {
     }
 
     if (this.orientation === 'horizontal') {
-      this.x = this.barX + this.barWidth + 8;
+      this.x = this.barX + this.barWidth;
       // if the value is negative then it's on the left of the x0.
       // we need to put the data label in front of the bar
       if (this.value < 0) {
@@ -87,14 +87,14 @@ export class BarLabelComponent implements OnChanges {
     } else {
       // orientation must be "vertical"
       this.x = this.barX + this.barWidth / 2;
-      this.y = this.barY + this.barHeight - 8;
+      this.y = this.barY + this.barHeight;
 
       if (this.value < 0) {
         this.y = this.y + this.verticalPadding;
         this.textAnchor = 'end';
       } else {
         this.y = this.y - this.verticalPadding;
-        this.textAnchor = 'start';
+        this.textAnchor = 'middle';
       }
       // this.transform = `rotate(-45, ${this.x} , ${this.y})`;
     }
