@@ -32,7 +32,7 @@ import { decimalChecker, count } from '../common/count/count.helper';
       />
       <title>{{ label }}</title>
       <svg:foreignObject
-        class="trimmed-label"
+        [class.trimmed-label]="trimmed"
         x="5"
         [attr.x]="textPadding[3]"
         [attr.y]="cardHeight - textPadding[2]"
@@ -79,6 +79,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() animations: boolean = true;
+  @Input() trimmed: boolean = false;
 
   @Output() select = new EventEmitter();
 
