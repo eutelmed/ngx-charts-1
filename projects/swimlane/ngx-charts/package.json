@@ -1,6 +1,6 @@
 {
   "name": "@eutelmed/ngx-charts",
-  "version": "14.0.1",
+  "version": "14.1.0",
   "description": "Declarative Charting Framework for Angular",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
